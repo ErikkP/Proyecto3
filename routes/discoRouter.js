@@ -3,7 +3,7 @@ const Disco = require("../models/disco")
 const discoRouter = express.Router();
 
 discoRouter.post("/disco", async (req,res)=>{
-    const {title, description} = req.body;
+    const {title, description, author} = req.body;
     try {
         if(!title || !description || !author){
             return res.status(400).json({
@@ -44,7 +44,7 @@ discoRouter.post("/disco", async (req,res)=>{
     }catch (error){
         return res.status(500).json({
             success: false,
-            message: "Internal server error"
+            message: error.message
         })
     }
     
