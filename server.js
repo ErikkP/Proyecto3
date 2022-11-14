@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const URL = process.env.MONGODB_URL;
 
 const discoRouter = require("./routes/discoRouter")
+const UserRouter = require("./router/UserRouter")
 
 app.use(express.json({extended: true}));
 app.use(express.urlencoded());
@@ -24,6 +25,7 @@ mongoose
 // console.log("Hola")
 
 app.use("/api", discoRouter)
+app.use("/api", UserRouter)
 
 app.listen(5000, () => {
   console.log("Server is running on port 5000");
