@@ -43,15 +43,18 @@ UserRouter.post("/user", async(req,res)=>{
             })
         }
         const validateEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
+
         const validatePassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
-        if(!validateEmail.match(email)){
+
+
+        if(!validateEmail.test(email)){
             return res.status(400).json({
                 success: false,
                 message: "El correo no és valido"
             })
         }
         let newUser = new User ({
-            username,
+            name,
             email,
             password
         })

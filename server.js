@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const URL = process.env.MONGODB_URL;
 
 const discoRouter = require("./routes/discoRouter")
-const UserRouter = require("./router/UserRouter")
+const UserRouter = require("./routes/UserRouter")
 
 app.use(express.json({extended: true}));
 app.use(express.urlencoded());
