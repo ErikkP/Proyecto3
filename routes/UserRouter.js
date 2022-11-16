@@ -7,7 +7,7 @@ const salt = bcrypt.genSaltSync(10);
 const jwt = require('jsonwebtoken');
 
 const createToken = (user) => {
-    return jwt.sign(user, proccess.env.ACCES_TOKEN_SECRET, {expiresIn: '7d'});
+    return jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {expiresIn: '7d'});
 };
 
 
