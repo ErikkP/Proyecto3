@@ -117,7 +117,7 @@ UserRouter.post("/login", async(req,res)=>{
             })
         }
 
-        return res.statusMessage(200).json({
+        return res.status(200).json({
             success: true,
             message:"Usuario logueado con éxito"
         })
