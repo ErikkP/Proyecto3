@@ -72,13 +72,14 @@ UserRouter.post("/register", async(req,res)=>{
                 message: "La contraseña debe tener al menos una mayúscula, una minúscula y un número",
             });
         }
-
+        
 
         let passwordHash = bcrypt.hashSync(password, salt);
         let newUser = new User ({
             name,
             email,
             password:passwordHash,
+            role,
         });
 
         await newUser.save()
