@@ -5,13 +5,12 @@ const bcrypt = require("bcrypt");
 // const { JsonWebTokenError } = require("jsonwebtoken");
 const salt = bcrypt.genSaltSync(10);
 const jwt = require('jsonwebtoken');
+const auth = require("../middleware/auth");
+
 
 const createToken = (user) => {
     return jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {expiresIn: '7d'});
 };
-
-
-
 
 
 UserRouter.post("/register", async(req,res)=>{
@@ -24,14 +23,6 @@ UserRouter.post("/register", async(req,res)=>{
                 message: "Este usuario ya está registrado"
             })
         }
-        
-        // const product = await Product.findOne({title});
-        // if(product){
-        //     return res.status(400).json({
-        //         success: false,
-        //         message: "Este producto ya está registrado, no puedes registrar de nuevo el mismo producto"
-        //     })
-        // }
 
         if(!name || !email || !password){
             return res.status(400).json({
@@ -53,6 +44,8 @@ UserRouter.post("/register", async(req,res)=>{
                 message: "La contraseña debe tener al menos 6 caracteres"
             })
         }
+
+        
         const validateEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
 
         const validatePassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
@@ -129,5 +122,25 @@ UserRouter.post("/login", async(req,res)=>{
         })
     }
 });
+
+UserRouter.get("/user", auth, async (req, res)=>{
+    try {
+        const user = await User.findById(req.user.id);
+        if (!user)
+        return res.status(400).json({
+            success: false,
+            message: "Usuario no encontrado"
+        });
+        return res.status(200).json({
+            success: true,
+            user,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+})
 
 module.exports = UserRouter;

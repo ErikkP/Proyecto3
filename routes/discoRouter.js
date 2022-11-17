@@ -55,7 +55,7 @@ discoRouter.post("/disco", auth, authAdmin, async (req,res)=>{
 }  );
 
 
-discoRouter.get("/disco/:id", async (req, res) => {
+discoRouter.get("/disco/:id", auth, authAdmin, async (req, res) => {
     const {id} = req.params;
     try {
         let disco = await Disco.findById(id)
@@ -73,7 +73,24 @@ discoRouter.get("/disco/:id", async (req, res) => {
 });
 
 
-discoRouter.put("/disco/:id", async (req, res) => {
+discoRouter.get("/discos", auth, authAdmin, async (req, res) => {
+    const {id} = req.params;
+    try {
+        let discos = await Disco.findById({})
+        return res.status(200).json({
+            success: true,
+            discos,
+        });
+    } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: error.message
+            })
+        }
+});
+
+
+discoRouter.put("/disco/:id", auth, authAdmin, async (req, res) => {
     const {id} = req.params;
     const {title, description} = req.body
     try {
@@ -90,7 +107,7 @@ discoRouter.put("/disco/:id", async (req, res) => {
     }
 });
 
-discoRouter.delete("/disco/:id", async (req,res) =>{
+discoRouter.delete("/disco/:id", auth, authAdmin, async (req,res) =>{
     const {id} = req.params;
     try {
         await Disco.findByIdAndDelete(id);
