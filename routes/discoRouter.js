@@ -1,8 +1,11 @@
 const express = require("express")
 const Disco = require("../models/disco")
 const discoRouter = express.Router();
+const auth = require("../middleware/auth");
 
-discoRouter.post("/disco", async (req,res)=>{
+
+
+discoRouter.post("/disco", auth, async (req,res)=>{
     const {title, description, author} = req.body;
     try {
         if(!title || !description || !author){
