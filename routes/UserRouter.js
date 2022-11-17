@@ -2,7 +2,6 @@ const express = require("express");
 const User = require("../models/User");
 const UserRouter = express.Router();
 const bcrypt = require("bcrypt");
-// const { JsonWebTokenError } = require("jsonwebtoken");
 const salt = bcrypt.genSaltSync(10);
 const jwt = require('jsonwebtoken');
 const auth = require("../middleware/auth");
@@ -103,7 +102,7 @@ UserRouter.post("/login", async(req,res)=>{
             })
         }
         const passwordOK = bcrypt.compareSync(password, user.password);
-        if(passwordOK){
+        if(!passwordOK){
             return res.status(400).json({
                 success: false,
                 message: "Alguno de los datos son incorrectos (password)"
