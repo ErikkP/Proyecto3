@@ -79,7 +79,6 @@ UserRouter.post("/register", async(req,res)=>{
             name,
             email,
             password:passwordHash,
-            role,
         });
 
         await newUser.save()
@@ -117,10 +116,11 @@ UserRouter.post("/login", async(req,res)=>{
                 message: "Alguno de los datos son incorrectos (password)"
             })
         }
-
+        const accessToken = createToken({ id: User._id })
         return res.status(200).json({
             success: true,
-            message:"Usuario logueado con éxito"
+            message:"Usuario logueado con éxito",
+            accessToken,
         })
     }catch(error){
         return res.status(500).json({

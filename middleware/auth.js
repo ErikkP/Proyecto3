@@ -10,14 +10,16 @@ const auth = (req, res, next) => {
              return res.status(400).json({
                 success: false, 
                 message: "Invalid Authentication (token incorrecto)",
-             })     
+             });     
           req.user = user;
           next();
-        })
+        });
     } catch (error) {
         return res.status(500).json({
             success: false,
             message: error.message,
         });
     }
-}
+};
+
+module.exports = auth;
