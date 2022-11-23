@@ -3,17 +3,25 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
     title: {
         type: String,
+        required: true
+    },
+    price : {
+        type: Number,
+        required: true
     },
     description: {
         type: String, 
+        required: true
     },
     category: {
-        
-    }, 
-
+        type: String,
+    },
+    image: {
+        type: Object
+    }
 },
 {timestamps: true}
-)
+);
 
 
 
@@ -25,3 +33,5 @@ const productSchema = new mongoose.Schema({
         //         message: "Este producto ya está registrado, no puedes registrar de nuevo el mismo producto"
         //     })
         // }
+
+module.exports = mongoose.model("Product", productSchema);

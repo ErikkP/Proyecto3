@@ -12,6 +12,7 @@ const auth = (req, res, next) => {
                 message: "Invalid Authentication (token incorrecto)",
              });     
           req.user = user;
+          console.log(user.id)
           next();
         });
     } catch (error) {

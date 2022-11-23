@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-const userSchema = new mongoose.Schema({
-    name: {
+
+const paymentSchema = new mongoose.Schema({
+    user_id: {
         type: String,
         required: true
     },
@@ -8,22 +9,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    password: {
+    paymentID: {
         type: String,
         required: true
     },
-    role: {
-        type: Number,
-        default: 0,
+    address: {
+        type: Object,
+        
     },
-    cart :{
+    cart: {
         type: Array,
         default: [],
     }
+})
 
-
-},{ timestamps: true }
-);
-
-module.exports = mongoose.model("User", userSchema)
-
+module.exports = mongoose.model("Payment", paymentSchema)

@@ -5,6 +5,7 @@ const authAdmin = async (req,res,next) => {
     const user = await User.findOne({
         _id: req.user.id
     })
+    console.log(user.role)
     if(user.role === 0){
         return res.status(400).json({
             success: false,

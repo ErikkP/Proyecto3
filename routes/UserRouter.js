@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const salt = bcrypt.genSaltSync(10);
 const jwt = require('jsonwebtoken');
 const auth = require("../middleware/auth");
+const authAdmin = require("../middleware/authAdmin");
 
 
 const createToken = (user) => {
@@ -108,13 +109,29 @@ UserRouter.post("/login", async(req,res)=>{
                 message: "Alguno de los datos son incorrectos (password)"
             })
         }
-        const accessToken = createToken({ id: User._id })
+        const accessToken = createToken({ id: user._id })
         return res.status(200).json({
             success: true,
             message:"Usuario logueado con éxito",
             accessToken,
         })
     }catch(error){
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+});
+
+UserRouter.put("/user", auth, async (req, res) => {
+    const {role} = req.body
+    try {
+        await User.findByIdAndUpdate(req.user.id, {role})
+        return res.status(200).json ({
+            success: true,
+            message: "User updated successfully"
+        })
+    } catch (error) {
         return res.status(500).json({
             success: false,
             message: error.message
@@ -141,5 +158,50 @@ UserRouter.get("/user", auth, async (req, res)=>{
         })
     }
 })
+
+
+UserRouter.get("/users", auth, authAdmin, async (req,res)=>{
+    try {
+        let users = await User.find({}).select("name email")
+        if(!users){
+            return res.status(400).json({
+                success: false,
+                message: "No hay usuarios en la base de datos"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            users,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+})
+
+UserRouter.post("/cart", auth, async (req,res)=>{
+    try {
+        const user = await User.findById(req.user.id);
+        if(!user)
+        return res.status(400).json({
+            success: false,
+            message: "Usuario no encontrado",
+        });
+        await User.findOneAndUpdate({_id:req.user.id}, { cart: req.body.cart })
+        return res.status(200).json({
+            success: true,
+            message: "Producto añadido con exito"
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+
+    }
+})
+
 
 module.exports = UserRouter;
