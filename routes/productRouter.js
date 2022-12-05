@@ -7,8 +7,8 @@ const authAdmin = require("../middleware/authAdmin");
 
 productRouter.post("/product", auth, authAdmin, async (req,res) => {
     try {
-        const {title, price, description, category, image} = req.body;
-        if(!title || !price || !description || !category || !image) {
+        const {title, author, price, description, category, image} = req.body;
+        if(!title ||!author || !price || !description || !category || !image) {
             return res.status(400).json({
                 success: false,
                 message: "Por favor, completa todos los campos"
@@ -17,6 +17,7 @@ productRouter.post("/product", auth, authAdmin, async (req,res) => {
 
         const newProduct = new Product({
             title, 
+            author,
             price,
             description,
             category,
@@ -35,6 +36,57 @@ productRouter.post("/product", auth, authAdmin, async (req,res) => {
             message: error.message,
         })
     }
+})
+
+productRouter.put("/product/:id", auth, authAdmin, async (req, res) => {
+    const {id} = req.params;
+    const {title, description} = req.body
+    try {
+        await Product.findByIdAndUpdate(id, { title, description})
+        return res.status(200).json ({
+            success: true,
+            message: "Disc updated successfully"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+});
+
+productRouter.delete("/product/:id", auth, authAdmin, async (req,res) =>{
+    const {id} = req.params;
+    try {
+        await Product.findByIdAndDelete(id);
+        return res.status(200).json({
+            success: true,
+            message: "product deleted successfully"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+})
+
+productRouter.get("/products", async (req,res)=> {
+    try{
+    let products = await Product.find();
+    return res.status(200).json({
+        success: true,
+        products,
+        message: "Productos obtenidos con éxito"
+    })
+    }catch(error){
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+
+
 })
 
 module.exports = productRouter;

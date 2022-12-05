@@ -91,7 +91,6 @@ UserRouter.post("/register", async(req,res)=>{
     }
 });
 
-
 UserRouter.post("/login", async(req,res)=>{
     const {email, password} = req.body;
     try{
@@ -158,7 +157,6 @@ UserRouter.get("/user", auth, async (req, res)=>{
         })
     }
 })
-
 
 UserRouter.get("/users", auth, authAdmin, async (req,res)=>{
     try {

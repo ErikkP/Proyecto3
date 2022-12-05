@@ -2,13 +2,14 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
-const cloudinary = require("cloudinary")
-const fileUpload = require("express-fileupload")
+const cloudinary = require("cloudinary");
+const fileUpload = require("express-fileupload");
+const cors = require("cors");
 
 const URL = process.env.MONGODB_URL;
 
 
-const discoRouter = require("./routes/discoRouter")
+// const discoRouter = require("./routes/discoRouter")
 const UserRouter = require("./routes/UserRouter")
 const productRouter = require("./routes/productRouter")
 const PaymentRouter = require("./routes/PaymentRouter")
@@ -19,6 +20,7 @@ app.use(express.urlencoded());
 app.use(fileUpload({
   useTempFiles: true,
 }))
+app.use(cors());
 
 
 mongoose
@@ -42,7 +44,7 @@ mongoose
 // });
 
 
-app.use("/api", discoRouter)
+// app.use("/api", discoRouter)
 app.use("/api", UserRouter)
 app.use("/api", productRouter)
 app.use("/api", PaymentRouter)
