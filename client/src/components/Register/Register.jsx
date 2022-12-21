@@ -29,7 +29,7 @@ const Register = () => {
         localStorage.setItem("token", response.data.accessToken);
         //   localStorage.getItem("token")
         setTimeout(()=>{
-          window.location.href="/"
+          window.location.href="/login"
         }, 3000)
         setSuccessM(response.data.message)
       } catch (error) {

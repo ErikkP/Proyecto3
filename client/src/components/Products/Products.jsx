@@ -30,7 +30,7 @@ const Products = () => {
             <h4>Grupo: {producto.author}</h4>
             <h4>Género: {producto.category}</h4>
             <h4>{producto.price} €</h4>
-            <p className="descP">{producto.description}</p>
+            {/* <p className="descP">{producto.description}</p> */}
           </div>
           </Link>  
         );
