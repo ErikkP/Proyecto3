@@ -83,6 +83,11 @@ const Login = () => {
           <button type="submit" class="btn btn-dark">
             Iniciar sesión
           </button>
+          
+          <button class="btn btn-secondary">
+            <a href="/register">Registrarse</a>
+              
+            </button>
           <div
           class="alert alert-primary"
           role="alert"
