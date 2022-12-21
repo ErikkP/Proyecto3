@@ -10,6 +10,16 @@
     padding-top: 50px;
 } */
 
+.bton{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn{
+    width: 35%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 label{
     color: white;
     font-family: 'Courier New', Courier, monospace;

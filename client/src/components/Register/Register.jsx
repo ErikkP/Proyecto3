@@ -46,7 +46,7 @@ const Register = () => {
           <form className="formulario" onSubmit={registerSubmit}>
           <div class="mb-3">
               <label for="exampleInputName1" class="form-label">
-                Name
+                Nombre:
               </label>
               <input
                 type="name"
@@ -59,7 +59,7 @@ const Register = () => {
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">
-                Email address
+                Correo electrónico:
               </label>
               <input
                 name="email"
@@ -71,12 +71,12 @@ const Register = () => {
                 aria-describedby="emailHelp"
               />
               <div id="emailHelp" class="form-text">
-                We'll never share your email with anyone else.
+                No compartiremos tu email con nadie.
               </div>
             </div>
             <div class="mb-3">
               <label for="exampleInputName1" class="form-label">
-                Address
+                Dirección:
               </label>
               <input
                 type="address"
@@ -89,7 +89,7 @@ const Register = () => {
             </div>
             <div class="mb-3">
               <label for="exampleInputName1" class="form-label">
-                Phone number
+                Número de teléfono:
               </label>
               <input
                 type="phone"
@@ -102,7 +102,7 @@ const Register = () => {
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">
-                Password
+                Contraseña:
               </label>
               <input
                 type="password"
