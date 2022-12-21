@@ -40,9 +40,9 @@ productRouter.post("/product", auth, authAdmin, async (req,res) => {
 
 productRouter.put("/product/:id", auth, authAdmin, async (req, res) => {
     const {id} = req.params;
-    const {title, description} = req.body
+    const {title, description, author, price, image} = req.body
     try {
-        await Product.findByIdAndUpdate(id, { title, description})
+        await Product.findByIdAndUpdate(id, { title, description, author, price, image})
         return res.status(200).json ({
             success: true,
             message: "Disc updated successfully"
@@ -61,7 +61,7 @@ productRouter.delete("/product/:id", auth, authAdmin, async (req,res) =>{
         await Product.findByIdAndDelete(id);
         return res.status(200).json({
             success: true,
-            message: "product deleted successfully"
+            message: "Product deleted successfully"
         })
     } catch (error) {
         return res.status(500).json({
@@ -88,5 +88,22 @@ productRouter.get("/products", async (req,res)=> {
 
 
 })
+
+productRouter.get("/product/:id", async (req, res) => {
+    const {id} = req.params;
+    try {
+        let producto = await Product.findById(id)
+        return res.status(200).json({
+            success: true,
+            producto,
+            message: "Product found successfully"
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+});
 
 module.exports = productRouter;

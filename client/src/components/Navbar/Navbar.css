@@ -1,0 +1,33 @@
+.Logo{
+    margin: auto;
+    
+}
+
+.navbar{
+    background-color: black;
+}
+
+.navbar-toggler {
+    background-color: rgb(255, 255, 255);
+    /* height: 30px; */
+    margin-right: 25px;
+}
+
+.nav-link,
+.nav-item{
+    color: white;
+}
+
+.offcanvas-header,
+.offcanvas-body{
+    background-color: black;
+}
+
+.icononav{
+    padding-left: 15px;
+}
+
+.fondo{
+    background-color: black !important;
+
+}

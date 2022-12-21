@@ -14,7 +14,7 @@ const createToken = (user) => {
 
 
 UserRouter.post("/register", async(req,res)=>{
-    const {name, email, password} = req.body
+    const {name, email, password, address, phone} = req.body
     try{
         const user = await User.findOne({email})
         if(user){
@@ -24,7 +24,7 @@ UserRouter.post("/register", async(req,res)=>{
             })
         }
 
-        if(!name || !email || !password){
+        if(!name || !email || !password || !address || !phone){
             return res.status(400).json({
                 success: false,
                 message: "Por favor, rellena todos los campos"
@@ -71,6 +71,8 @@ UserRouter.post("/register", async(req,res)=>{
         let newUser = new User ({
             name,
             email,
+            phone,
+            address,
             password:passwordHash,
         });
 
@@ -98,14 +100,14 @@ UserRouter.post("/login", async(req,res)=>{
         if(!user){
             return res.status(400).json({
                 success: false,
-                message: "Alguno de los datos son incorrectos (correo)"
+                message: "Alguno de los datos son incorrectos"
             })
         }
         const passwordOK = bcrypt.compareSync(password, user.password);
         if(!passwordOK){
             return res.status(400).json({
                 success: false,
-                message: "Alguno de los datos son incorrectos (password)"
+                message: "Alguno de los datos son incorrectos"
             })
         }
         const accessToken = createToken({ id: user._id })
@@ -113,6 +115,7 @@ UserRouter.post("/login", async(req,res)=>{
             success: true,
             message:"Usuario logueado con éxito",
             accessToken,
+            user
         })
     }catch(error){
         return res.status(500).json({
@@ -123,16 +126,40 @@ UserRouter.post("/login", async(req,res)=>{
 });
 
 UserRouter.put("/user", auth, async (req, res) => {
-    const {role} = req.body
+    // const {role} = req.body
+    // try {
+    //     await User.findByIdAndUpdate(req.user.id, {role})
+    //     return res.status(200).json ({
+    //         success: true,
+    //         message: "User updated successfully"
+    //     })
+    // } catch (error) {
+    //     return res.status(500).json({
+    //         success: false,
+    //         message: error.message
+    //     })
+    // }
+
+    const {name, password, email, address, phone} = req.body
+
     try {
-        await User.findByIdAndUpdate(req.user.id, {role})
-        return res.status(200).json ({
-            success: true,
-            message: "User updated successfully"
-        })
+        const user = await User.findById(req.user.id)
+        const Password = user.password
+        let passHash = bcrypt.hashSync(password, salt);
+        await User.findByIdAndUpdate(req.user.id, {
+            name,
+            email,
+            address,
+            phone,
+            password: passHash
+    })
+    return res.status(200).json({
+        success: true,
+        message: "Usuario modificado con exito"
+    });
     } catch (error) {
         return res.status(500).json({
-            success: false,
+            success: true,
             message: error.message
         })
     }

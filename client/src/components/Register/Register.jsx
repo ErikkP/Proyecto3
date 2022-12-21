@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 const Register = () => {
     const [info, setInfo] = useState({
       name: "",
       email: "",
+      phone: "",
+      address: "",
       password: "",
     });
   
@@ -25,18 +28,21 @@ const Register = () => {
         console.log(response);
         localStorage.setItem("token", response.data.accessToken);
         //   localStorage.getItem("token")
+        setTimeout(()=>{
+          window.location.href="/"
+        }, 3000)
         setSuccessM(response.data.message)
       } catch (error) {
         setErrorM(error.response.data.message);
-        // setTimeout(() => {
-        //   window.location.href = "/register";
-        // }, 3000);
+        setTimeout(() => {
+          window.location.href = "/register";
+        }, 3000);
       }
     };
   
     return (
         <div>
-          <h1>Register</h1>
+          <h1 className="Login">Register</h1>
           <form className="formulario" onSubmit={registerSubmit}>
           <div class="mb-3">
               <label for="exampleInputName1" class="form-label">
@@ -69,6 +75,32 @@ const Register = () => {
               </div>
             </div>
             <div class="mb-3">
+              <label for="exampleInputName1" class="form-label">
+                Address
+              </label>
+              <input
+                type="address"
+                class="form-control"
+                id="exampleInputAddress1"
+                name="address"
+                value={info.address}
+                onChange={onChangeInput}
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputName1" class="form-label">
+                Phone number
+              </label>
+              <input
+                type="phone"
+                class="form-control"
+                id="exampleInputPhoneNumber1"
+                name="phone"
+                value={info.phone}
+                onChange={onChangeInput}
+              />
+            </div>
+            <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">
                 Password
               </label>
@@ -87,11 +119,10 @@ const Register = () => {
               Check me out
             </label>
           </div> */}
-            <button type="submit" class="btn btn-primary">
-              Submit
+            <button type="submit" class="btn btn-secondary">
+              Registrarse
             </button>
-          </form>
-          <div
+            <div
             class="alert alert-primary"
             role="alert"
             style={{ display: successM ? "block" : "none" }}
@@ -105,6 +136,8 @@ const Register = () => {
           >
             {errorM}
           </div>
+          </form>
+          
         </div>
     );
   };

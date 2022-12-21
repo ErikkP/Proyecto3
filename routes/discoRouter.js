@@ -55,22 +55,7 @@
 // }  );
 
 
-// discoRouter.get("/disco/:id", async (req, res) => {
-//     const {id} = req.params;
-//     try {
-//         let disco = await Disco.findById(id)
-//         return res.status(200).json({
-//             success: true,
-//             disco,
-//             message: "Disc found successfully"
-//         });
-//     } catch (error) {
-//         return res.status(500).json({
-//             success: false,
-//             message: error.message
-//         })
-//     }
-// });
+
 
 
 // discoRouter.get("/discos", async (req, res) => {

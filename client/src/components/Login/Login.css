@@ -1,4 +1,28 @@
 .formulario{
-    width: 50%;
+    width: 30%;
+    margin: auto;
+    /* margin-top: 150px; */
+    margin-bottom: 250px;
+    
+}
+
+/* .mb-3{
+    padding-top: 50px;
+} */
+
+label{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+
+.Login{
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 50px;
+}
+
+.alert-primary,
+.alert-danger{
     margin: auto;
 }

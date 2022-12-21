@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
 const Login = () => {
   const [info, setInfo] = useState({
     email: "",
@@ -23,23 +24,29 @@ const Login = () => {
       });
       console.log(response);
       localStorage.setItem("token", response.data.accessToken);
+      localStorage.setItem("role",response.data.user.role);
+      localStorage.setItem("name",response.data.user.name)
+      setTimeout(()=>{
+        window.location.href="/"
+      }, 3000)
       //   localStorage.getItem("token")
       setSuccessM(response.data.message)
     } catch (error) {
       setErrorM(error.response.data.message);
-      setTimeout(() => {
-        window.location.href = "/register";
-      }, 3000);
+      // setTimeout(() => {
+      //   window.location.href = "/login";
+      // }, 3000);
     }
   };
 
   return (
       <div>
-        <h1>Login</h1>
+        
+        <h1 className="Login">Iniciar sesión</h1>
         <form className="formulario" onSubmit={loginSubmit}>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">
-              Email address
+              Correo electrónico
             </label>
             <input
               name="email"
@@ -51,12 +58,12 @@ const Login = () => {
               aria-describedby="emailHelp"
             />
             <div id="emailHelp" class="form-text">
-              We'll never share your email with anyone else.
+              No compartiremos tu email con nadie.
             </div>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">
-              Password
+              Contraseña
             </label>
             <input
               type="password"
@@ -73,11 +80,10 @@ const Login = () => {
             Check me out
           </label>
         </div> */}
-          <button type="submit" class="btn btn-primary">
-            Submit
+          <button type="submit" class="btn btn-dark">
+            Iniciar sesión
           </button>
-        </form>
-        <div
+          <div
           class="alert alert-primary"
           role="alert"
           style={{ display: successM ? "block" : "none" }}
@@ -91,6 +97,8 @@ const Login = () => {
         >
           {errorM}
         </div>
+        </form>
+        
       </div>
   );
 };
