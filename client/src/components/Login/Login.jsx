@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="Login2">
       <h1 className="Login">Iniciar sesión</h1>
       <form className="formulario" onSubmit={loginSubmit}>
         <div class="mb-3">

@@ -41,7 +41,7 @@ const Register = () => {
     };
   
     return (
-        <div>
+        <div className="Login2">
           <h1 className="Login">Register</h1>
           <form className="formulario" onSubmit={registerSubmit}>
           <div class="mb-3">

@@ -1,9 +1,17 @@
 .formulario{
-    width: 30%;
+    width: 90%;
     margin: auto;
     /* margin-top: 150px; */
     margin-bottom: 250px;
+
     
+    
+}
+
+.Login2{
+    background-color: rgba(0, 0, 0, 0.577);
+    width: 40%;
+    margin: auto;
 }
 
 /* .mb-3{
@@ -30,6 +38,7 @@ label{
     text-align: center;
     margin-top: 200px;
     margin-bottom: 50px;
+    
 }
 
 .alert-primary,
