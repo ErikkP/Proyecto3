@@ -170,10 +170,15 @@ input{
 }
 
 .descripcion{
-    width: 40%;
+    width: 70%;
     margin: auto;
 }
 
+.addp{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+}
 
 /* CREAR PRODUCTO */
 

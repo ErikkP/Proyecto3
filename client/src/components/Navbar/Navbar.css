@@ -3,7 +3,9 @@
     
 }
 
-
+.offcanvas-body{
+    padding-left: 30px;
+}
 
 .navbar{
     background-color: black;

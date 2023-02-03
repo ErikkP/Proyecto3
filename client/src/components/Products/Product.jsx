@@ -55,8 +55,10 @@ const Product = () => {
         <div className="producto">
 
           <div className="card-body">
+            <div className="addp">
           <h2 className="card-text precio h2">{product.price}€</h2>
           <a href="/cart" className="h2"><i class="fa-solid fa-cart-plus fa-lg "></i></a>
+          </div>
             <h3 className="card-title">Título: {product.title}</h3>
             <h3 className="card-text autor">Grupo autor: {product.author}</h3>
             <h3 className="card-text categoria">Categoria: {product.category}</h3>
