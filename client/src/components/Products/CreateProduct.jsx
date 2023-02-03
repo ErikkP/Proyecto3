@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -14,6 +15,8 @@ const CreateProduct = () => {
 
     const [image, setImage] = useState(false)
     const token = localStorage.getItem("token")
+    const [successM, setSuccesM] = useState(null)
+    const navigate = useNavigate();
 
 
     const handleUpload = async(e) =>{
@@ -55,6 +58,12 @@ const CreateProduct = () => {
                 }
             })
         console.log(res)
+        
+        setSuccesM(res.data.message);
+        setTimeout(() => {
+            navigate("/new_product")
+        }, 2000);
+        
         } catch (error) {
             console.log(error.response)
         }

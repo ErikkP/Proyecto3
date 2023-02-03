@@ -70,14 +70,14 @@ const Product = () => {
 
 
         <div className="bot-prod">
+        <a href="/cart" class="btn btn-dark">
+            Añadir al carrito
+          </a>
           <a href="/" class="btn btn-secondary">
             Volver al inicio
           </a>
-          <a href="/cart" class="btn btn-success">
-            Añadir al carrito
-          </a>
           {role == 1 ? (
-            <button onClick={deleteProduct} class="btn btn-danger">
+            <button onClick={deleteProduct} class="btn btn-secondary">
               Eliminar producto
             </button>
           ) : (
@@ -85,7 +85,7 @@ const Product = () => {
           )}
           {role == 1 ? (
             <Link to={`/mod_product/${productId}`}>
-              <button class="btn btn-warning">Modificar Producto</button>
+              <button class="btn btn-dark">Modificar Producto</button>
             </Link>
           ) : (
             <></>

@@ -16,8 +16,8 @@ p{
 
 
 .imagenP{
-    height: 400px;
-    width: 400px;
+    /* height: 200px; */
+    width: 300px;
     /* border-radius: 50%; */
     margin: auto;
 }
@@ -36,17 +36,19 @@ h2{
 .Producto-home{
     padding: 20px;
     flex-direction: column;
-    display: inline-flex;
+    /* display: inline-flex; */
     text-align: center;
-    width: 40%;
-    margin-left: 125px;
+    /* width: 40%;
+    margin-left: 125px; */
     background-color: rgba(0, 0, 0, 0.577);
 }
 
 
 body{
     /* background-color: rgb(62, 7, 7); */
-    background-image: url(https://images3.alphacoders.com/756/75619.jpg);     background-repeat: no-repeat;     background-attachment: fixed;     background-size:1900px;  
+    background-image: url(https://images3.alphacoders.com/756/75619.jpg);     background-repeat: no-repeat;     background-attachment: fixed;       
+    width: -webkit-fill-available;
+    background-position: center;
 }
 
 a{
@@ -146,8 +148,8 @@ input{
 }
 
 .imagenprod{
-    width: 50%;
-    height: 500px;
+    width: 75%;
+    
     margin: auto;
 }
 
@@ -167,6 +169,10 @@ input{
     margin-right: 10px;
 }
 
+.descripcion{
+    width: 40%;
+    margin: auto;
+}
 
 
 /* CREAR PRODUCTO */
